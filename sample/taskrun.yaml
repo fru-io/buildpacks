@@ -1,0 +1,38 @@
+# Sample tekton TaskRun that can be used for these buildpacks
+# Caches cache-able layers in PersistentVolume
+# inputs: ddev/php-builder:7.3 builder
+#         https://github.com/wozniakjan/drupal8-demo repository
+# output: ddev/in-cluster-cnbp-drupal8-demo image
+apiVersion: tekton.dev/v1alpha1
+kind: TaskRun
+metadata:
+  generateName: example-run-
+spec:
+  taskRef:
+    name: buildpacks-v3
+  podTemplate:
+    volumes:
+    - name: cache
+      persistentVolumeClaim:
+        claimName: buildpacks-cache
+  inputs:
+    resources:
+    - name: source
+      resourceSpec:
+        type: git
+        params:
+        - name: url
+          value: https://github.com/wozniakjan/drupal8-demo
+    params:
+    - name: BUILDER_IMAGE
+      value: ddev/php-builder:7.3
+    - name: CACHE
+      value: cache
+  outputs:
+    resources:
+    - name: image
+      resourceSpec:
+        type: image
+        params:
+        - name: url
+          value: ddev/in-cluster-cnbp-drupal8-demo

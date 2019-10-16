@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+set -xeo pipefail
+
+echo "---> DDEV buildpack"
+
+# INPUT ARGUMENTS
+ENV_DIR=$2/env
+LAYERS_DIR=$1
+PLAN_PATH=$3
+
+echo $ENV_DIR
+echo $LAYERS_DIR
+echo $PLAN_PATH
+
+# Match the ddev-local implementation with docroot and cms detection
+
+# 1. docroot detection
+# https://github.com/drud/ddev/blob/1bdcde384c610b3b17834585b1292580fdafe299/pkg/ddevapp/config.go#L794
+availableDirs=( "web/public" "web" "docroot" "htdocs" "_www" "public" )
+docroot=$(find "${availableDirs[@]}" -maxdepth 1 -name 'index.php' -or -name 'index.html' | head -n 1 | xargs dirname ||:)
+
+# 2. cms detection
+# https://github.com/drud/ddev/blob/1bdcde384c610b3b17834585b1292580fdafe299/pkg/ddevapp/apptypes.go#L65
+if [[ -f $docroot/misc/ahah.js ]]; then
+    cms="drupal-6"
+elif [[ -f $docrootc/misc/ajax.js ]]; then
+    cms="drupal-7"
+elif [[ -f $docroot/core/scripts/drupal.sh ]]; then
+    cms="drupal-8"
+elif [[ -f $docroot/typo3 ]]; then
+    cms="typo3"
+fi
+
+DDEV_LAYER=$LAYERS_DIR/ddev
+mkdir -p $DDEV_LAYER/env.launch
+echo "/var/www/html/$docroot" > $DDEV_LAYER/env.launch/DDEV_BP_DOCROOT
+echo "$cms" > $DDEV_LAYER/env.launch/DDEV_BP_CMS
+echo -e 'launch = true' > "$DDEV_LAYER.toml"
+
+echo "---> Done"

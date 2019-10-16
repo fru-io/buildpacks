@@ -1,0 +1,13 @@
+# Buildpack API version
+api = "0.2"
+
+# Buildpack ID and metadata
+[buildpack]
+id = "live.ddev.ddev"
+version = "0.0.1"
+name = "DDEV Buildpack"
+
+[[stacks]]
+id = "live.ddev.stacks.7.3"
+[[stacks]]
+id = "live.ddev.stacks.7.2"

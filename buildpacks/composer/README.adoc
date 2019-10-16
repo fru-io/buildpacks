@@ -1,0 +1,3 @@
+== Composer buildpack
+
+Auto-detect and cache composer installations.

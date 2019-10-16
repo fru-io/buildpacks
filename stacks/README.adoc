@@ -1,0 +1,15 @@
+== Stacks
+
+DDEV stacks for PHP buildpacks.
+
+- link:7.2[7.2] - stack for PHP 7.2
+- link:7.3[7.3] - stack for PHP 7.3
+
+Each PHP stack is split into three images
+- base - containing common packages and tools
+- build - containing packages and tools needed during build
+- run - containing packages and tools needed during container runtime
+
+The base was selected `ubuntu:bionic` as a well tested base working with 
+buildpacks lifecycle and used in 
+links:https://github.com/buildpack/docs/blob/fe154a0b751b02bdd6cfce74e821a2621ce75f0f/content/docs/operator-guide/create-a-builder.md#1-builder-configuration[examples].

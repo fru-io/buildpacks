@@ -1,0 +1,8 @@
+== DDEV buildpack
+
+Tries to provide the link:https://github.com/drud/ddev[ddev] functionality from
+local environment to the cloud hosted environment.
+
+Currently implemented features:
+- docroot autodetection - as env variable `DDEV_BP_DOCROOT`
+- CMS type autodetection - as env variable `DDEV_BP_CMS`

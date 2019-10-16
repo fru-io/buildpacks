@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+echo "---> Typo3 buildpack scaffold"
+
+# INPUT ARGUMENTS
+env_dir=$2/env
+layers_dir=$1
+plan_path=$3
+
+echo $env_dir
+echo $layers_dir
+echo $plan_path
+
+echo "---> Done"

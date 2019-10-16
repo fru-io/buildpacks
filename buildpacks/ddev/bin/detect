@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -xeo pipefail
+
+# Always run
+
+exit 0

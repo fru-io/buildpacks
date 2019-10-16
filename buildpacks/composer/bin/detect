@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -xeo pipefail
+
+if [[ ! -f composer.json || ! -f composer.lock ]]; then
+    exit 1
+fi

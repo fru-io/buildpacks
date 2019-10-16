@@ -1,0 +1,46 @@
+# Buildpacks to include in builder
+[[buildpacks]]
+uri = "../buildpacks/composer"
+
+[[buildpacks]]
+uri = "../buildpacks/yarn"
+
+[[buildpacks]]
+uri = "../buildpacks/drupal"
+
+[[buildpacks]]
+uri = "../buildpacks/typo3"
+
+[[buildpacks]]
+uri = "../buildpacks/ddev"
+
+# Order used for detection
+[[order]]
+    [[order.group]]
+    id = "live.ddev.composer"
+    version = "0.0.1"
+    optional = true
+    
+    [[order.group]]
+    id = "live.ddev.yarn"
+    version = "0.0.1"
+    optional = true
+    
+    [[order.group]]
+    id = "live.ddev.drupal"
+    version = "0.0.1"
+    optional = true
+    
+    [[order.group]]
+    id = "live.ddev.typo3"
+    version = "0.0.1"
+    optional = true
+    
+    [[order.group]]
+    id = "live.ddev.ddev"
+    version = "0.0.1"
+    
+[stack]
+id = "live.ddev.stacks.7.3"
+run-image = "ddev/php-stack-run:7.3"
+build-image = "ddev/php-stack-build:7.3"

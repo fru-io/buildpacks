@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+echo "---> Composer buildpack"
+
+# INPUT ARGUMENTS
+ENV_DIR=$2/env
+LAYERS_DIR=$1
+PLAN_PATH=$3
+
+echo $ENV_DIR
+echo $LAYERS_DIR
+echo $PLAN_PATH
+
+COMPOSER_LAYER=$LAYERS_DIR/composer
+mkdir -p "$COMPOSER_LAYER"
+
+# env variable for composer to store cache in the buildpack layer
+export COMPOSER_CACHE_DIR=$COMPOSER_LAYER
+composer install
+
+# cache composer
+echo "cache = true" > "$COMPOSER_LAYER.toml"
+
+echo "---> Done"

@@ -1,0 +1,47 @@
+:imagesdir: ./images
+:icons: font
+
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+image::ddev_logo.png[]
+
+= DDEV Buildpacks
+
+Common repository for DDEV buildpacks. This aims to match 
+link:https://github.com/drud/ddev[ddev] tool for cloud deployments and provide
+tools for seamless transition from local development to live deployment.
+
+== Project Status
+DDEV buildpacks are currently alpha, and are under active development. Breaking
+changes to the API and behavior between the releases can be expected.
+
+== Development / Getting Started
+This repository contains the code for link:buildpacks[buildpacks], 
+link:stacks[stacks], and link:builders[builders]. A pre-requisite is installed 
+link:https://buildpacks.io/[pack]. In order to build the stacks and builders 
+locally for development purposes, you can invoke `make`
+```
+$ make stacks builders
+...
+Successfully created builder image ddev/php-builder:7.3
+Tip: Run pack build <image-name> --builder ddev/php-builder:7.3 to use this builder
+```
+
+And then use the selected builder on your site code
+```
+$ pack build <image-name> --builder ddev/php-builder:7.3 --path <path-to-your-site>
+```
+
+== License
+
+This project is licensed under Apache 2.0 license. Read the link:LICENSE[LICENSE] file in the top distribution directory, for the full license text.
+
+== Contributing / Development
+
+Interested in contributing to the project? We would love your suggestions, contributions, and help! Please start by reviewing our https://github.com/drud/community[Community Guidelines]
