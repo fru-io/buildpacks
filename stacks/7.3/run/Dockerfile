@@ -15,7 +15,7 @@ RUN mkdir -p /etc/nginx/sites-enabled /var/log/nginx /var/cache/nginx/client_tem
     && touch /var/log/nginx/access.log \
     && touch /var/log/nginx/error.log \
     && touch /etc/nginx/nginx.conf \
-    && ln -s /workspace /var/www/html \
+    && ln -s /workspace/source /var/www/html \
     && chown -R www-data:www-data /var/www /var/cache/nginx /var/log/nginx /etc/nginx/sites-enabled /run \
     && chmod -R 755 /var/www /etc/nginx/sites-enabled \
     && chmod -R 766 /var/cache/nginx /var/log/nginx \
